@@ -34,6 +34,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               >
                 Academic
               </Link>
+              <Link href="/blog" className="hover:text-slate-900">
+                Guides
+              </Link>
               <Link href="/account" className="font-medium text-indigo-600 hover:text-indigo-700">
                 My letters
               </Link>
