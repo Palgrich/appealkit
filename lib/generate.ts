@@ -127,6 +127,57 @@ const FALLBACK_QUESTIONS: Record<string, FollowUpQuestion[]> = {
       hint: "e.g. Team went from 5 to 2 people in January; I absorbed two roles",
     },
   ],
+  medicalbill: [
+    {
+      question: "Have you seen an itemized bill, and did anything on it look wrong or unfamiliar?",
+      why: "Billing errors are common, and disputing specific line items is the fastest path to a reduction.",
+      hint: "e.g. Haven't requested it yet / There's a $900 charge for a consult that never happened",
+    },
+    {
+      question: "What is your approximate annual household income and family size?",
+      why: "Many hospitals must offer charity-care discounts based on income — this determines if that lever applies to you.",
+      hint: "e.g. About $38,000, family of three",
+    },
+    {
+      question: "What exact amount could you pay as a lump sum this month, if they discounted the bill?",
+      why: "A concrete settlement number ('I can pay $2,000 by the 30th') converts far better than a vague request.",
+      hint: "e.g. $2,000 by the end of the month",
+    },
+  ],
+  visaletter: [
+    {
+      question: "What are the visitors' ties to their home country — property, pensions, other family, business?",
+      why: "This is the single thing consular officers weigh most; naming ties in the letter supports the application.",
+      hint: "e.g. They own their apartment in Delhi, both receive pensions, my brother's family lives nearby",
+    },
+    {
+      question: "Have they visited the US or other countries before and returned home?",
+      why: "Prior travel history with returns is strong evidence of intent to go back.",
+      hint: "e.g. Visited us in 2023 for three months and returned; also traveled to the UK twice",
+    },
+    {
+      question: "Any specific occasion with a date — a birth, graduation, wedding?",
+      why: "A dated family event gives the trip a concrete, verifiable purpose.",
+      hint: "e.g. Our daughter's graduation on May 15",
+    },
+  ],
+  goodwill: [
+    {
+      question: "What exactly fixed the root cause — new autopay, account alerts, different bank?",
+      why: "Creditors grant goodwill adjustments when they believe it won't happen again; the safeguard is the proof.",
+      hint: "e.g. Set up autopay from my new checking account plus payment-due alerts",
+    },
+    {
+      question: "How quickly did you pay once you noticed, and is the account current now?",
+      why: "'Paid the same day I saw it' and a current account make the one-time-mistake framing credible.",
+      hint: "e.g. Paid in full the day the statement arrived; current ever since",
+    },
+    {
+      question: "Why does removing this mark matter right now?",
+      why: "A concrete stake ('applying for a mortgage in the fall') gives the reviewer a human reason to help.",
+      hint: "e.g. We're applying for a mortgage in September and this is the only negative mark",
+    },
+  ],
   academic: [
     {
       question: "What specific dates/semester did the difficulties start, and which courses were most affected?",

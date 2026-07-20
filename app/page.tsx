@@ -9,9 +9,10 @@ export default function Home() {
           The right letter, when it matters most.
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-slate-600">
-          Denied benefits. Put on a PIP. Dismissed from school. In each case you have days to
-          respond in writing — and the quality of that letter matters. AppealKit turns your
-          side of the story into a professional, ready-to-send letter in minutes.
+          Denied benefits. Put on a PIP. A hospital bill you can&apos;t pay. A late mark on
+          your credit. In each case the right written letter changes the outcome — and
+          AppealKit turns your side of the story into a professional, ready-to-send letter in
+          minutes.
         </p>
       </div>
 

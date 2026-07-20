@@ -25,17 +25,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               Appeal<span className="text-indigo-600">Kit</span>
             </Link>
             <nav className="flex gap-5 text-sm text-slate-600">
-              <Link href="/unemployment-appeal-letter-generator" className="hover:text-slate-900">
-                Unemployment
-              </Link>
-              <Link href="/pip-rebuttal-letter-generator" className="hover:text-slate-900">
-                PIP
-              </Link>
-              <Link
-                href="/academic-dismissal-appeal-letter-generator"
-                className="hover:text-slate-900"
-              >
-                Academic
+              <Link href="/" className="hover:text-slate-900">
+                All letters
               </Link>
               <Link href="/blog" className="hover:text-slate-900">
                 Guides

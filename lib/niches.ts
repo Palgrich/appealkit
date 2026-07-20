@@ -313,6 +313,271 @@ export const NICHES: Record<string, Niche> = {
       "1) Header with student name, ID placeholder [Student ID], date. 2) RE line: appeal of [dismissal type]. 3) Opening: respectful statement of appeal and gratitude for the process. 4) What happened: honest, specific circumstances with timeline. 5) Ownership: acknowledge poor decisions (e.g., not withdrawing, not seeking help) without groveling. 6) What has changed: concrete steps already taken. 7) The plan: specific course load, support services, work limits, checkpoints. 8) Respectful closing with commitment. After the letter, add a separate 'SUCCESS PLAN' addendum as a short structured list.",
     deliverables: ["Full appeal letter", "Success plan addendum", "PDF download", "Editable Word (.docx)"],
   },
+
+  medicalbill: {
+    id: "medicalbill",
+    slug: "medical-bill-negotiation-letter-generator",
+    name: "Medical Bill Negotiation Letter",
+    h1: "Medical Bill Negotiation Letter Generator",
+    metaTitle: "Medical Bill Negotiation Letter Generator — Lower a Hospital Bill in Writing",
+    metaDescription:
+      "Facing a huge hospital bill? Generate a professional negotiation letter using the right lever: charity care, Medicare-rate benchmark, or a lump-sum offer. Free preview.",
+    priceCents: 700,
+    priceLabel: "$7",
+    heroSub:
+      "Hospital bills are negotiable — but only if you ask in writing, with the right lever. Answer a few questions and get a professional negotiation letter pack. Free preview before you pay.",
+    bullets: [
+      "Picks the right lever: charity care, billing errors, Medicare-rate benchmark, or lump-sum settlement",
+      "Includes an itemized-bill request — errors appear on a large share of hospital bills",
+      "Professional tone billing departments take seriously",
+      "Instant PDF + editable Word download",
+    ],
+    fields: [
+      { id: "fullName", label: "Your full name", type: "text", required: true, placeholder: "Jane Smith" },
+      { id: "provider", label: "Hospital / provider name", type: "text", required: true, placeholder: "Mercy General Hospital" },
+      { id: "amount", label: "Total amount billed", type: "text", required: true, placeholder: "$14,300" },
+      {
+        id: "insurance",
+        label: "Insurance situation",
+        type: "select",
+        options: [
+          "Uninsured at the time of care",
+          "Insured — this is what's left after insurance",
+          "Insurance denied the claim",
+        ],
+        required: true,
+      },
+      {
+        id: "situation",
+        label: "Your situation: what happened, and what can you realistically pay?",
+        type: "textarea",
+        required: true,
+        placeholder:
+          "Example: Emergency appendectomy in March. I earn about $38k/year and support two kids. I could pay around $2,000 as a lump sum, or $150/month...",
+        help: "Income level matters — many hospitals are required to offer charity care discounts based on income.",
+      },
+      {
+        id: "goal",
+        label: "What outcome are you asking for?",
+        type: "select",
+        options: [
+          "Reduce the bill (discount / charity care)",
+          "Settle for a lump sum I can afford",
+          "Set up an affordable payment plan",
+          "Dispute charges that look wrong",
+        ],
+        required: true,
+      },
+    ],
+    faq: [
+      {
+        q: "Can you really negotiate a hospital bill?",
+        a: "Yes — hospitals negotiate constantly. Nonprofit hospitals are legally required to have financial assistance (charity care) policies, uninsured patients are often billed 2-4x what insurers pay for the same care, and billing errors are common. A written request that cites the right lever gets routed to people with authority to adjust the bill.",
+      },
+      {
+        q: "What's the 'right lever' and how does the generator pick it?",
+        a: "It depends on your situation: income near charity-care thresholds → financial assistance application; uninsured → ask to be billed at the rate insurers actually pay (often benchmarked to Medicare rates); cash available → lump-sum settlement offer; suspicious charges → itemized bill request and dispute. The generator reads your answers and structures the letter around the strongest lever.",
+      },
+      {
+        q: "Will negotiating hurt my credit?",
+        a: "Asking to negotiate does not affect your credit. Medical debt under $500 no longer appears on credit reports at all, and paid medical collections are removed. Negotiating before a bill goes to collections is exactly the right time to act.",
+      },
+      {
+        q: "Is this legal or financial advice?",
+        a: "No — AppealKit drafts documents; it is not a law firm or financial advisor. For large debts, a nonprofit credit counselor or medical billing advocate can also help; our letter is often the right first step either way.",
+      },
+    ],
+    seoBody: [
+      {
+        heading: "Why written negotiation beats phone calls",
+        text: "Phone agents at billing departments have scripts and limited authority. A written negotiation letter gets escalated, creates a paper trail, and lets you cite specific policies — the hospital's own financial assistance policy, fair-price benchmarks, or billing errors — that a phone call glosses over. If the account is ever disputed or sent to collections, your letter is evidence you engaged in good faith.",
+      },
+      {
+        heading: "The three numbers that change the conversation",
+        text: "First: what Medicare pays for the same procedure — often a fraction of the chargemaster price you were billed. Second: the hospital's charity care income threshold — at many nonprofits, families earning under 2-4x the federal poverty line qualify for steep discounts or full forgiveness. Third: your realistic lump sum — billing departments frequently accept 40-60% of a balance paid at once. A letter built around these numbers reads like it was written by someone who knows the system.",
+      },
+      {
+        heading: "Always request the itemized bill",
+        text: "Summary bills hide errors: duplicate charges, services never rendered, wrong billing codes. Requesting a fully itemized bill is your legal right, frequently reveals reductions on its own, and signals to the billing department that you're paying attention. Our letter pack includes this request automatically.",
+      },
+    ],
+    promptContext:
+      "The user received a large medical bill and wants to negotiate it down in writing with the hospital/provider billing department. Levers, chosen based on the user's situation: (1) charity care / financial assistance if income is modest — nonprofit hospitals must have such policies; (2) uninsured fair-price argument — ask to be billed near Medicare/insurer rates rather than chargemaster rates; (3) lump-sum settlement offer if they can pay some cash now; (4) itemized bill request and dispute of errors. Tone: respectful, financially candid, cooperative but informed — someone who knows bills are negotiable.",
+    letterStructure:
+      "1) Header with patient name, account number placeholder [Account Number], date. 2) RE line with provider and amount. 3) Opening: intent to resolve the bill in good faith. 4) The situation: brief facts (care received, insurance status, financial reality with specifics the user provided). 5) The ask, built around the strongest lever for this user's situation, with a specific number if they provided one. 6) Request for a fully itemized bill. 7) Request for written response and a hold on collections activity while the account is under review. 8) Professional closing. After the letter, add a short 'NEXT STEPS' addendum: how to send it, who to address, what to do when they respond.",
+    deliverables: ["Negotiation letter", "Itemized-bill request", "Next-steps guide", "PDF + Word download"],
+  },
+
+  visaletter: {
+    id: "visaletter",
+    slug: "visa-invitation-letter-generator",
+    name: "Visa Invitation Letter",
+    h1: "Visa Invitation Letter Generator (B1/B2)",
+    metaTitle: "Visa Invitation Letter Generator — Invite Parents & Family to the USA",
+    metaDescription:
+      "Inviting parents or family for a US visitor visa? Generate a personalized invitation letter with the details consulates expect. Free preview, PDF & Word.",
+    priceCents: 500,
+    priceLabel: "$5",
+    heroSub:
+      "Inviting your parents or family to visit the US? A clear invitation letter with the right details supports their B1/B2 interview. Answer a few questions — free preview before you pay.",
+    bullets: [
+      "Personalized to your relationship, dates, and who covers expenses",
+      "Includes the details consular officers look for — ties, purpose, accommodation",
+      "Optional sponsor/accommodation statement included",
+      "Instant PDF + editable Word download",
+    ],
+    fields: [
+      { id: "fullName", label: "Your full name (the inviter)", type: "text", required: true, placeholder: "Anil Sharma" },
+      {
+        id: "status",
+        label: "Your status in the US",
+        type: "select",
+        options: ["US citizen", "Green card holder", "H-1B / work visa", "F-1 / student", "Other"],
+        required: true,
+      },
+      { id: "guests", label: "Who are you inviting? (names + relationship)", type: "text", required: true, placeholder: "My parents, Raj and Meena Sharma" },
+      { id: "dates", label: "Planned visit dates (approximate)", type: "text", required: true, placeholder: "September 10 — November 20, 2026" },
+      {
+        id: "purpose",
+        label: "Purpose of the visit",
+        type: "select",
+        options: [
+          "Family visit / tourism",
+          "Meeting a new grandchild",
+          "Graduation ceremony",
+          "Wedding",
+          "Medical consultation support",
+          "Other family event",
+        ],
+        required: true,
+      },
+      {
+        id: "details",
+        label: "Details: where will they stay, who pays for what, their ties back home",
+        type: "textarea",
+        required: true,
+        placeholder:
+          "Example: They will stay with me at my home in Austin, TX. I will cover accommodation and daily expenses; they cover flights. Both are retired with a home and pension in Delhi, my brother's family also lives there...",
+        help: "Ties to their home country (home, pension, family, business) are what consular officers weigh most.",
+      },
+    ],
+    faq: [
+      {
+        q: "Is an invitation letter required for a B1/B2 visitor visa?",
+        a: "No — it's not a required document, but it's customary and helpful. A clear letter explains the purpose of the trip, where the visitor will stay, and who covers expenses, which supports the applicant's DS-160 answers and interview. It's one piece of a strong application, not a guarantee.",
+      },
+      {
+        q: "What should a visa invitation letter include?",
+        a: "Your full name, status in the US, and address; the visitor's names and relationship to you; the purpose and dates of the visit; where they'll stay; who covers which expenses; and a mention of the visitor's ties to their home country. Our generator structures all of this from your answers.",
+      },
+      {
+        q: "Does the letter need to be notarized?",
+        a: "Generally no — consulates do not require notarization for invitation letters. A signed letter (printed, or a clear PDF) is standard practice. Some applicants include a copy of the inviter's status document (visa/green card/passport page); that's optional and your choice.",
+      },
+      {
+        q: "Will this guarantee the visa?",
+        a: "No — visa decisions are made by consular officers based on the whole application, primarily the applicant's own ties to their home country. AppealKit drafts a clear, complete letter; it is not an immigration advisor and doesn't influence decisions.",
+      },
+    ],
+    seoBody: [
+      {
+        heading: "What consular officers actually weigh",
+        text: "The core question at a B1/B2 interview is whether the visitor will return home. That's why the strongest invitation letters don't oversell the trip — they matter-of-factly state the family occasion, the dates, the accommodation, and, crucially, the visitor's ties back home: property, pensions, other children, a business. Mentioning ties in the invitation supports what the applicant says in their own interview.",
+      },
+      {
+        heading: "One letter, or letter plus sponsor statement?",
+        text: "If you're covering costs, saying so clearly matters — vague financial arrangements invite questions. Many families pair the invitation letter with a short sponsor statement (sometimes alongside Form I-134, where appropriate) spelling out who pays for travel, lodging, and daily expenses. Our generator produces the invitation letter with an integrated support statement based on what you tell us about expenses.",
+      },
+      {
+        heading: "Timing the letter with the interview",
+        text: "Applicants typically bring the invitation letter to the visa interview as a printed copy, alongside the appointment confirmation and their own documents. Generate the letter once dates are roughly known — approximate dates are fine and normal — and email it to your family so they can print it at home.",
+      },
+    ],
+    promptContext:
+      "The user is a person in the US inviting family (often parents) to visit on a B1/B2 visitor visa and needs an invitation letter to support the application. The letter is addressed to the visa applicant (or 'To the U.S. Consulate' as customary), states the inviter's status, the relationship, purpose and dates of the visit, accommodation, who covers which expenses, and mentions the visitors' ties to their home country. Tone: warm but formal, factual, confident. Never promise or imply the letter guarantees a visa; never invent immigration details.",
+    letterStructure:
+      "1) Inviter's name and address block with [Address] placeholder, date. 2) 'To: U.S. Consulate General, [City]' or addressed to the applicant per convention. 3) Opening: who the inviter is (name, status in the US, occupation placeholder if not provided) and who they are inviting (names, relationship). 4) Purpose and dates of the visit, specific occasion if provided. 5) Accommodation and financial arrangements: who pays for what, stated plainly. 6) Visitors' ties to home country as provided. 7) Closing with willingness to provide further information, signature line. If the user indicated they cover expenses, integrate a brief sponsor statement paragraph.",
+    deliverables: ["Invitation letter", "Integrated sponsor statement", "PDF + Word download"],
+  },
+
+  goodwill: {
+    id: "goodwill",
+    slug: "goodwill-letter-generator",
+    name: "Goodwill Letter (Late Payment Removal)",
+    h1: "Goodwill Letter Generator — Remove a Late Payment",
+    metaTitle: "Goodwill Letter Generator — Ask a Creditor to Remove a Late Payment",
+    metaDescription:
+      "One late payment can cost you a mortgage rate. Generate a creditor-specific goodwill letter with the structure that actually gets late marks removed. Free preview.",
+    priceCents: 500,
+    priceLabel: "$5",
+    heroSub:
+      "A single late payment can sit on your credit report for 7 years — but creditors can remove it as a courtesy, and a well-written goodwill letter is how you ask. Free preview before you pay.",
+    bullets: [
+      "The emotional-plus-factual structure that works: what happened, your record since, the specific ask",
+      "Tailored to your creditor and situation (autopay glitch, medical event, one-time hardship)",
+      "Includes a follow-up letter if the first is ignored",
+      "Instant PDF + editable Word download",
+    ],
+    fields: [
+      { id: "fullName", label: "Your full name", type: "text", required: true, placeholder: "Jane Smith" },
+      { id: "creditor", label: "Creditor name", type: "text", required: true, placeholder: "Chase, Capital One, Navient..." },
+      { id: "account", label: "Account type", type: "select", options: ["Credit card", "Auto loan", "Student loan", "Mortgage", "Personal loan", "Other"], required: true },
+      { id: "lateWhen", label: "When was the late payment (month/year)?", type: "text", required: true, placeholder: "March 2025" },
+      {
+        id: "reason",
+        label: "What caused it? (the honest story)",
+        type: "textarea",
+        required: true,
+        placeholder:
+          "Example: I switched banks and my autopay didn't transfer — I didn't notice until the statement arrived. Paid in full the day I saw it. Never been late before or since...",
+        help: "One-time, explainable causes work best: autopay failure, medical emergency, family crisis, deployment.",
+      },
+      {
+        id: "history",
+        label: "Your record with this creditor (how long, otherwise on-time?)",
+        type: "text",
+        required: true,
+        placeholder: "Customer 6 years, no other late payments",
+      },
+    ],
+    faq: [
+      {
+        q: "Do goodwill letters actually work?",
+        a: "Sometimes — and 'sometimes' is worth a $5 letter when a late mark is costing you a mortgage approval. They work best when the late payment was a one-time event with a sympathetic cause, your history is otherwise clean, and the account is current or paid. Creditors have no obligation to remove accurate marks, but goodwill adjustments happen routinely.",
+      },
+      {
+        q: "Is this the same as a credit dispute?",
+        a: "No. A dispute is for inaccurate information and goes through the credit bureaus under the FCRA. A goodwill letter asks the creditor to remove an accurate late mark as a courtesy. If your late payment is actually an error, dispute it instead — and our letter tells you when that's the better path.",
+      },
+      {
+        q: "Where do I send a goodwill letter?",
+        a: "To the creditor's correspondence address (not the payment address) — often listed on your statement or the creditor's site. Some creditors respond to secure messages too; paper mail to the right department, politely persistent, tends to work best. The letter pack includes guidance on finding the right address and a follow-up letter template.",
+      },
+      {
+        q: "Is this credit repair or legal advice?",
+        a: "No. AppealKit is a letter-drafting tool — it is not a credit repair organization, law firm, or financial advisor, and results depend entirely on your creditor's discretion.",
+      },
+    ],
+    seoBody: [
+      {
+        heading: "Why one late payment matters so much",
+        text: "Payment history is the largest component of a credit score, and a single 30-day late mark on an otherwise clean report can drop a good score by 50-100 points — enough to change a mortgage rate or an approval decision. The mark stays for seven years, but its impact fades much faster, and its removal restores the score immediately. That asymmetry is why goodwill letters are worth writing.",
+      },
+      {
+        heading: "The structure that gets read",
+        text: "Effective goodwill letters are short and follow a consistent arc: the relationship (how long you've been a customer, your otherwise clean record), the event (what caused the late payment, honestly and briefly), the correction (you paid, you fixed the cause — new autopay, new bank), and the specific ask (a goodwill adjustment removing the late mark from all three bureaus). Groveling, threats, and template-speak all lower the odds; a specific, human, accountable letter raises them.",
+      },
+      {
+        heading: "Persistence is part of the method",
+        text: "First letters often get form-letter denials — 'we report accurate information.' That's not the end. A polite second letter, sometimes addressed to the executive office, succeeds where the first failed often enough that follow-up is standard practice among people who do this successfully. Our pack includes the follow-up letter, so you're ready for the 'no' before it comes.",
+      },
+    ],
+    promptContext:
+      "The user has a late payment mark on their credit report and is writing a goodwill letter asking the creditor to remove it as a courtesy. The mark is accurate (if it were an error, they'd dispute instead) — so the letter appeals to the relationship and circumstances, not to legal claims. Structure that works: loyal-customer framing, honest one-time cause, evidence of correction, specific ask (goodwill adjustment removing the mark from all three credit bureaus). Tone: warm, accountable, concise — a valued customer writing a human letter, not a form. Never threaten, never cite laws aggressively, never claim the mark is inaccurate.",
+    letterStructure:
+      "1) Header with customer name, account number placeholder [Account Number], date. 2) Creditor name and [Correspondence Address] placeholder. 3) RE line: 'Goodwill adjustment request — account [Account Number]'. 4) Opening: relationship length and appreciation, otherwise-clean record. 5) The event: what caused the late payment, with the user's specifics. 6) The correction: paid, and the safeguard now in place. 7) The ask: goodwill adjustment removing the [month/year] late mark from all three credit bureaus, with a sentence on why it matters to the user now. 8) Warm professional closing. After the letter, add a 'FOLLOW-UP LETTER' addendum: a shorter, polite second letter to send if there's no response in 30 days.",
+    deliverables: ["Goodwill letter", "Follow-up letter", "Where-to-send guidance", "PDF + Word download"],
+  },
 };
 
 export function getNicheBySlug(slug: string): Niche | undefined {
