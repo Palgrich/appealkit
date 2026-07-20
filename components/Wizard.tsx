@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Niche } from "@/lib/niches";
+import GenerationProgress from "./GenerationProgress";
 
 const STORAGE_KEY = "appealkit_form";
 
@@ -110,13 +111,16 @@ export default function Wizard({ niche }: { niche: Niche }) {
       )}
 
       {!preview ? (
-        <button
-          onClick={handlePreview}
-          disabled={loading !== null}
-          className="mt-6 w-full rounded-xl bg-indigo-600 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-indigo-500 disabled:opacity-60"
-        >
-          {loading === "preview" ? "Writing your letter…" : "Generate free preview →"}
-        </button>
+        <>
+          <button
+            onClick={handlePreview}
+            disabled={loading !== null}
+            className="mt-6 w-full rounded-xl bg-indigo-600 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-indigo-500 disabled:opacity-60"
+          >
+            {loading === "preview" ? "Writing your letter…" : "Generate free preview →"}
+          </button>
+          {loading === "preview" && <GenerationProgress label="Writing your preview" />}
+        </>
       ) : (
         <div className="mt-6">
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">

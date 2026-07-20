@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import GenerationProgress from "@/components/GenerationProgress";
 
 const STORAGE_KEY = "appealkit_form";
 
@@ -61,9 +62,11 @@ export default function ResultClient() {
 
   if (status === "loading") {
     return (
-      <div className="py-24 text-center">
-        <p className="text-lg font-medium text-slate-700">Writing your full letter…</p>
-        <p className="mt-2 text-sm text-slate-500">This usually takes 10–20 seconds.</p>
+      <div className="mx-auto max-w-md px-4 py-24">
+        <p className="text-center text-lg font-medium text-slate-700">
+          Payment confirmed — writing your full letter
+        </p>
+        <GenerationProgress label="Writing your full letter" />
       </div>
     );
   }
