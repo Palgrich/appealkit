@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AppealKit
 
-## Getting Started
+Professional appeal & rebuttal letters in minutes. Free preview → one-time payment ($7–9) → full letter + PDF/DOCX.
 
-First, run the development server:
+**Niches (one engine, many landings):**
+
+- `/unemployment-appeal-letter-generator` — $7
+- `/pip-rebuttal-letter-generator` — $9
+- `/academic-dismissal-appeal-letter-generator` — $7
+
+## Stack
+
+Next.js (App Router) · Tailwind v4 · Anthropic API · Stripe Checkout · pdf-lib + docx for downloads. No database: form data lives in the visitor's localStorage; payment verification is done against Stripe on every unlock/download call.
+
+## Deploy (Vercel, ~10 minutes)
+
+1. Import this repo at vercel.com/new.
+2. Add Environment Variables:
+
+| Variable | Required | Notes |
+|---|---|---|
+| `ANTHROPIC_API_KEY` | for real letters | без него работает mock-режим |
+| `STRIPE_SECRET_KEY` | for real payments | `sk_live_...` (или `sk_test_...` для теста). Без него — mock-оплата |
+| `NEXT_PUBLIC_BASE_URL` | yes | `https://yourdomain.com` (или временный `https://appealkit.vercel.app`) |
+| `ANTHROPIC_MODEL` | no | default: `claude-sonnet-4-5` |
+
+3. Deploy. Проверь флоу: лендинг → форма → превью → оплата (Stripe test card `4242 4242 4242 4242`) → полное письмо → PDF/DOCX.
+4. Домен: купи, добавь в Vercel, обнови `NEXT_PUBLIC_BASE_URL`.
+5. Google Search Console: добавь сайт, отправь `/sitemap.xml`.
+
+## Dev
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Без ключей всё работает в mock-режиме (мок-письмо, мок-оплата) — флоу тестируется целиком.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Known MVP tradeoffs
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Оплаченная Stripe-сессия не помечается использованной — одну сессию теоретически можно переиспользовать для регенерации. Для $7-продукта приемлемо; фикс — Vercel KV со списком использованных session_id.
+- Если покупатель откроет success-ссылку на другом устройстве, форма из localStorage недоступна — на странице есть объяснение и просьба открыть на исходном устройстве.
+- Email-капчер не встроен (Stripe и так собирает email покупателя). Для рассылки добавить провайдера позже.
 
-## Learn More
+## Disclaimer
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Not a law firm. No legal advice. Documents are drafts the user reviews and sends as their own.
