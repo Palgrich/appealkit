@@ -14,7 +14,9 @@ export function baseUrl(): string {
 }
 
 /** Verify a checkout session is paid. In mock mode (no Stripe key), accept mock_ sessions. */
-export async function verifyPaidSession(sessionId: string): Promise<{ paid: boolean; nicheId?: string }> {
+export async function verifyPaidSession(
+  sessionId: string
+): Promise<{ paid: boolean; nicheId?: string; email?: string }> {
   const stripe = getStripe();
   if (!stripe) {
     // Mock mode for local/dev testing without Stripe configured.
@@ -28,6 +30,7 @@ export async function verifyPaidSession(sessionId: string): Promise<{ paid: bool
     return {
       paid: session.payment_status === "paid",
       nicheId: (session.metadata?.nicheId as string) || undefined,
+      email: session.customer_details?.email || undefined,
     };
   } catch {
     return { paid: false };

@@ -20,6 +20,7 @@ export default function ResultClient() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [currentAnswer, setCurrentAnswer] = useState("");
   const [letter, setLetter] = useState<string | null>(null);
+  const [emailedTo, setEmailedTo] = useState<string | null>(null);
   const [downloading, setDownloading] = useState<string | null>(null);
   const stored = useRef<{ nicheId: string; form: Record<string, string> } | null>(null);
 
@@ -71,6 +72,7 @@ export default function ResultClient() {
         const data = await res.json();
         if (!res.ok) throw new Error(data.error);
         setLetter(data.letter);
+        if (data.emailed && data.emailedTo) setEmailedTo(data.emailedTo);
         setPhase("done");
         localStorage.removeItem(ANSWERS_KEY);
       })
@@ -236,6 +238,12 @@ export default function ResultClient() {
       <div className="mb-6 rounded-xl bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800">
         ✓ Here&apos;s your full letter. Review the [bracketed] placeholders — those are
         administrative details only you know (claim ID, addresses). Everything else is ready.
+        {emailedTo && (
+          <span className="mt-1 block font-normal">
+            📧 A copy with PDF and Word attachments was sent to <b>{emailedTo}</b> (check
+            spam if you don&apos;t see it).
+          </span>
+        )}
       </div>
       <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
         <p className="whitespace-pre-wrap font-serif text-[15px] leading-relaxed text-slate-800">
