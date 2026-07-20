@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   },
   description:
     "Generate professional appeal letters: unemployment denials, PIP rebuttals, academic dismissal appeals. Free preview, instant PDF & Word downloads.",
+  verification: {
+    google: "0P7aeJbdnOLqmH2MFsyEuBsNKEahWA_gvG4EryNmiy4",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
