@@ -24,8 +24,8 @@ export default function Terms() {
       <h2>Payments and refunds</h2>
       <p>
         Purchases are one-time payments processed by Stripe. If a technical failure prevents
-        you from receiving a document you paid for, contact us with your receipt and we will
-        regenerate it or refund you.
+        you from receiving a document you paid for, contact us at support@appealkits.com with
+        your receipt and we will regenerate it or refund you.
       </p>
       <h2>Acceptable use</h2>
       <p>

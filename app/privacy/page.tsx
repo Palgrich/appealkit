@@ -23,7 +23,7 @@ export default function Privacy() {
         run third-party advertising trackers.
       </p>
       <h2>Contact</h2>
-      <p>For any privacy question or deletion request, contact us via the email on our receipts.</p>
+      <p>For any privacy question or deletion request, email us at support@appealkits.com.</p>
     </div>
   );
 }
