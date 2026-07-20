@@ -7,7 +7,7 @@ export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
   try {
-    const { sessionId, nicheId, form } = await req.json();
+    const { sessionId, nicheId, form, answers } = await req.json();
     const niche = NICHES[nicheId];
     if (!niche || !sessionId || typeof form !== "object" || form === null) {
       return NextResponse.json({ error: "Invalid request" }, { status: 400 });
@@ -22,7 +22,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Session/product mismatch" }, { status: 403 });
     }
 
-    const letter = await generateLetter(niche, form);
+    const letter = await generateLetter(
+      niche,
+      form,
+      typeof answers === "object" && answers !== null ? answers : undefined
+    );
     return NextResponse.json({ letter });
   } catch (e) {
     console.error("unlock error", e);
