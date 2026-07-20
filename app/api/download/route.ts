@@ -1,17 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyPaidSession } from "@/lib/checkout";
 import { letterToPdf, letterToDocx } from "@/lib/documents";
+import { getAuthedEmail } from "@/lib/auth";
 
 export const maxDuration = 30;
 
 export async function POST(req: NextRequest) {
   try {
     const { sessionId, letter, format } = await req.json();
-    if (!sessionId || typeof letter !== "string" || letter.length === 0 || letter.length > 50000) {
+    if (typeof letter !== "string" || letter.length === 0 || letter.length > 50000) {
       return NextResponse.json({ error: "Invalid request" }, { status: 400 });
     }
-    const verdict = await verifyPaidSession(sessionId);
-    if (!verdict.paid) {
+    // Authorized via a paid Stripe session OR a signed-in account.
+    let authorized = false;
+    if (sessionId) {
+      const verdict = await verifyPaidSession(sessionId);
+      authorized = verdict.paid;
+    }
+    if (!authorized) {
+      authorized = getAuthedEmail(req) !== null;
+    }
+    if (!authorized) {
       return NextResponse.json({ error: "Payment not verified" }, { status: 402 });
     }
 

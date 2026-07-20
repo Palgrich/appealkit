@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Niche } from "@/lib/niches";
 import GenerationProgress from "./GenerationProgress";
 
@@ -11,6 +11,33 @@ export default function Wizard({ niche }: { niche: Niche }) {
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState<"preview" | "pay" | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [creditMode, setCreditMode] = useState(false);
+  const [credits, setCredits] = useState<number | null>(null);
+
+  useEffect(() => {
+    // ?mode=credit — signed-in user generating with a bonus credit
+    if (new URLSearchParams(window.location.search).get("mode") === "credit") {
+      fetch("/api/account")
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d) => {
+          if (d && d.credits > 0) {
+            setCreditMode(true);
+            setCredits(d.credits);
+          }
+        })
+        .catch(() => {});
+    }
+  }, []);
+
+  function goCreditFlow() {
+    setError(null);
+    if (missing.length > 0) {
+      setError(`Please fill in: ${missing.map((f) => f.label).join(", ")}`);
+      return;
+    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ nicheId: niche.id, form }));
+    window.location.href = "/result?mode=credit";
+  }
 
   const missing = niche.fields.filter((f) => f.required && !(form[f.id] || "").trim());
 
@@ -61,8 +88,13 @@ export default function Wizard({ niche }: { niche: Niche }) {
   return (
     <div id="wizard" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
       <h2 className="mb-6 text-xl font-semibold text-slate-900">
-        Build your letter — free preview
+        {creditMode ? "Build your letter" : "Build your letter — free preview"}
       </h2>
+      {creditMode && (
+        <div className="mb-5 rounded-lg bg-indigo-50 px-3 py-2 text-sm text-indigo-800">
+          Using your free credit — {credits} left. No payment needed.
+        </div>
+      )}
 
       <div className="space-y-5">
         {niche.fields.map((f) => (
@@ -110,7 +142,14 @@ export default function Wizard({ niche }: { niche: Niche }) {
         <p className="mt-4 rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</p>
       )}
 
-      {!preview ? (
+      {creditMode ? (
+        <button
+          onClick={goCreditFlow}
+          className="mt-6 w-full rounded-xl bg-indigo-600 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-indigo-500"
+        >
+          Continue — use 1 credit →
+        </button>
+      ) : !preview ? (
         <>
           <button
             onClick={handlePreview}

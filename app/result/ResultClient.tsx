@@ -13,6 +13,7 @@ type Phase = "verifying" | "interview" | "generating" | "done" | "error" | "nofo
 export default function ResultClient() {
   const params = useSearchParams();
   const sessionId = params.get("session_id");
+  const creditMode = params.get("mode") === "credit";
 
   const [phase, setPhase] = useState<Phase>("verifying");
   const [questions, setQuestions] = useState<FollowUpQuestion[]>([]);
@@ -25,7 +26,7 @@ export default function ResultClient() {
   const stored = useRef<{ nicheId: string; form: Record<string, string> } | null>(null);
 
   useEffect(() => {
-    if (!sessionId) {
+    if (!sessionId && !creditMode) {
       setPhase("error");
       return;
     }
@@ -58,10 +59,10 @@ export default function ResultClient() {
       })
       .catch(() => setPhase("error"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionId]);
+  }, [sessionId, creditMode]);
 
   function generate(finalAnswers: Record<string, string>) {
-    if (!stored.current || !sessionId) return;
+    if (!stored.current || (!sessionId && !creditMode)) return;
     setPhase("generating");
     fetch("/api/unlock", {
       method: "POST",
@@ -96,7 +97,7 @@ export default function ResultClient() {
   }
 
   async function download(format: "pdf" | "docx") {
-    if (!letter || !sessionId) return;
+    if (!letter || (!sessionId && !creditMode)) return;
     setDownloading(format);
     try {
       const res = await fetch("/api/download", {
@@ -121,7 +122,7 @@ export default function ResultClient() {
     return (
       <div className="mx-auto max-w-md px-4 py-24">
         <p className="text-center text-lg font-medium text-slate-700">
-          Payment confirmed ✓
+          {creditMode ? "Using 1 of your free credits" : "Payment confirmed ✓"}
         </p>
         <GenerationProgress label="Reviewing your answers" />
       </div>
@@ -133,10 +134,12 @@ export default function ResultClient() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-12">
         <div className="mb-6 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-          <span className="font-semibold">✓ Payment confirmed.</span> Before I write your
-          letter — a few quick questions to fill the gaps in your story. The more specific
-          you are, the fewer blanks you&apos;ll have to fill in yourself. Every question is
-          optional.
+          <span className="font-semibold">
+            {creditMode ? "✓ Using 1 free credit." : "✓ Payment confirmed."}
+          </span>{" "}
+          Before I write your letter — a few quick questions to fill the gaps in your story.
+          The more specific you are, the fewer blanks you&apos;ll have to fill in yourself.
+          Every question is optional.
         </div>
 
         <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">

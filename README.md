@@ -25,6 +25,8 @@ Next.js (App Router) · Tailwind v4 · Anthropic API · Stripe Checkout · pdf-l
 | `ANTHROPIC_MODEL` | no | default: `claude-sonnet-4-5` |
 | `RESEND_API_KEY` | for emailing letters | resend.com → API Keys. Без него письмо просто не отправляется на почту (сайт работает) |
 | `EMAIL_FROM` | no | default: `AppealKit <onboarding@resend.dev>` (для продакшена подключи свой домен в Resend) |
+| `AUTH_SECRET` | yes (для аккаунтов) | любая длинная случайная строка, напр. `openssl rand -hex 32` |
+| `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` | yes (для аккаунтов) | Vercel → Marketplace → Upstash Redis (бесплатный план), переменные добавятся сами. Без них аккаунты хранятся в памяти процесса (только для dev) |
 
 3. Deploy. Проверь флоу: лендинг → форма → превью → оплата (Stripe test card `4242 4242 4242 4242`) → полное письмо → PDF/DOCX.
 4. Домен: купи, добавь в Vercel, обнови `NEXT_PUBLIC_BASE_URL`.
